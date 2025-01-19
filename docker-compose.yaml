@@ -1,0 +1,47 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: app
+    volumes:
+      - .:/var/www
+    networks:
+      - spies-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    depends_on:
+      - app
+    networks:
+      - spies-network
+
+  db:
+    image: postgres:15-alpine
+    container_name: db
+    ports:
+      - "5432:5432"
+    environment:
+      DB_DATABASE: ${DB_DATABASE}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./docker/db/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
+    networks:
+      - spies-network
+
+networks:
+  spies-network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
