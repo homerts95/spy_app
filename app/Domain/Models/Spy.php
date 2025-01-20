@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
+use App\Domain\Events\SpyCreatedEvent;
 use App\Domain\ValueObjects\Agency;
 use App\Domain\ValueObjects\Date;
 use App\Domain\ValueObjects\Name;
@@ -16,6 +17,7 @@ class Spy
     private string $countryOfOperation;
     private Date $dateOfBirth;
     private ?Date $dateOfDeath;
+    private array $domainEvents = [];
 
     public function __construct(
         Name   $name,
@@ -40,8 +42,10 @@ class Spy
         ?Date  $dateOfDeath = null
     ): self
     {
-        //todo trigger event
-        return new self($name, $agency, $countryOfOperation, $dateOfBirth, $dateOfDeath);
+        $spy = new self($name, $agency, $countryOfOperation, $dateOfBirth, $dateOfDeath);
+        $spy->addDomainEvent(new SpyCreatedEvent($spy)); // event is recorded because is not handled here
+
+        return $spy;
     }
 
     public function getId(): int
@@ -72,5 +76,18 @@ class Spy
     public function getDateOfDeath(): ?Date
     {
         return $this->dateOfDeath;
+    }
+
+    private function addDomainEvent(object $event): void
+    {
+        $this->domainEvents[] = $event;
+    }
+
+    public function pullDomainEvents(): array
+    {
+        $events = $this->domainEvents;
+        $this->domainEvents = [];
+
+        return $events;
     }
 }
