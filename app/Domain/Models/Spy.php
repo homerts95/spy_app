@@ -10,7 +10,7 @@ use App\Domain\ValueObjects\Name;
 
 class Spy
 {
-    private int $id;
+    private ?int $id;
     private Name $name;
     private Agency $agency;
     private string $countryOfOperation;
