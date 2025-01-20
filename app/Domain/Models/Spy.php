@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
+use App\Domain\Events\HasDomainEvents;
 use App\Domain\Events\SpyCreatedEvent;
 use App\Domain\ValueObjects\Agency;
 use App\Domain\ValueObjects\Date;
@@ -11,13 +12,14 @@ use App\Domain\ValueObjects\Name;
 
 class Spy
 {
+    use HasDomainEvents;
+
     private ?int $id;
     private Name $name;
     private Agency $agency;
     private string $countryOfOperation;
     private Date $dateOfBirth;
     private ?Date $dateOfDeath;
-    private array $domainEvents = [];
 
     public function __construct(
         Name   $name,
@@ -76,18 +78,5 @@ class Spy
     public function getDateOfDeath(): ?Date
     {
         return $this->dateOfDeath;
-    }
-
-    private function addDomainEvent(object $event): void
-    {
-        $this->domainEvents[] = $event;
-    }
-
-    public function pullDomainEvents(): array
-    {
-        $events = $this->domainEvents;
-        $this->domainEvents = [];
-
-        return $events;
     }
 }
