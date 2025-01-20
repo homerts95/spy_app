@@ -43,4 +43,34 @@ class Spy
         //todo trigger event
         return new self($name, $agency, $countryOfOperation, $dateOfBirth, $dateOfDeath);
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getName(): Name
+    {
+        return $this->name;
+    }
+
+    public function getAgency(): Agency
+    {
+        return $this->agency;
+    }
+
+    public function getCountryOfOperation(): string
+    {
+        return $this->countryOfOperation;
+    }
+
+    public function getDateOfBirth(): Date
+    {
+        return $this->dateOfBirth;
+    }
+
+    public function getDateOfDeath(): ?Date
+    {
+        return $this->dateOfDeath;
+    }
 }
