@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Application\Actions\Auth\LoginAction;
+use App\Application\Actions\Auth\LogoutAction;
 use App\Application\DTOs\Auth\LoginRequestDTO;
-use App\Domain\Services\AuthenticationService;
 use App\Exceptions\InvalidCredentialsException;
+use App\Exceptions\TokenNotFoundException;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\JsonResponse;
 
@@ -13,6 +14,7 @@ class AuthController extends Controller
 {
     public function __construct(
         private readonly LoginAction $loginAction,
+        private readonly LogoutAction $logoutAction,
     ) {}
 
     /**
@@ -28,5 +30,15 @@ class AuthController extends Controller
         } catch (InvalidCredentialsException $e) {
             return response()->json(['message' => $e->getMessage()], $e->getCode());
         }
+    }
+
+    /**
+     * @throws TokenNotFoundException
+     */
+    public function revokeCurrentToken(): JsonResponse
+    {
+        $this->logoutAction->execute();
+
+        return response()->json(['message' => 'logout was successfully, token revoked']);
     }
 }
