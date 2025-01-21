@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Application\Actions\Auth\LoginAction;
 use App\Application\DTOs\Auth\LoginRequestDTO;
 use App\Domain\Services\AuthenticationService;
 use App\Exceptions\InvalidCredentialsException;
@@ -11,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 class AuthController extends Controller
 {
     public function __construct(
-        private readonly AuthenticationService $authService
+        private readonly LoginAction $loginAction,
     ) {}
 
     /**
@@ -21,7 +22,7 @@ class AuthController extends Controller
     {
         try {
             $dto = LoginRequestDTO::fromRequest($request->validated());
-            $token = $this->authService->authenticateUser($dto);
+            $token = $this->loginAction->execute($dto);
 
             return response()->json($token->toArray());
         } catch (InvalidCredentialsException $e) {
