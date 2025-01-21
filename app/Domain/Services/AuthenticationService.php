@@ -7,6 +7,7 @@ namespace App\Domain\Services;
 use App\Application\DTOs\Auth\LoginRequestDTO;
 use App\Domain\ValueObjects\Auth\AuthToken;
 use App\Exceptions\InvalidCredentialsException;
+use App\Exceptions\TokenNotFoundException;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -32,8 +33,17 @@ class AuthenticationService
         );
     }
 
-    public function revokeCurrentToken(User $user): void
+    /**
+     * @throws TokenNotFoundException
+     */
+    public function revokeCurrentToken(): void
     {
-        $user->currentAccessToken()->delete();
+        $personalAccessToken = auth()->user()->currentAccessToken();
+
+        if (!$personalAccessToken->exists()) {
+            throw new TokenNotFoundException();
+        }
+
+        $personalAccessToken->delete();
     }
 }
