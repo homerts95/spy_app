@@ -21,4 +21,12 @@ readonly class AuthToken
         return $this->type;
     }
 
+    public function toArray(): array
+    {
+        return [
+            'type' => $this->getType(),
+            'token' => $this->getPlainTextToken(),
+        ];
+    }
+
 }
