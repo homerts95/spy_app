@@ -23,6 +23,8 @@ class AuthenticationService
             throw new InvalidCredentialsException('wrong credentials.');
         }
 
+        $user->tokens()->where('name', $dto->email)->delete();
+
         $token = $user->createToken($dto->email);
 
         return new AuthToken(
