@@ -31,4 +31,14 @@ readonly class Name
     {
         return "{$this->firstName} {$this->lastName}";
     }
+
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
 }
