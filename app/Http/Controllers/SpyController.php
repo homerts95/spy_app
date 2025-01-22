@@ -30,7 +30,7 @@ class SpyController extends Controller
         ], Response::HTTP_CREATED);
     }
 
-    public function getRandomSpies(): JsonResponse
+    public function random(): JsonResponse
     {
         $spies = $this->getRandomSpiesAction->execute(5);
 
