@@ -14,7 +14,7 @@ class CreateSpyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false; //todo middleware?
+        return true; //todo middleware?
     }
 
     /**
