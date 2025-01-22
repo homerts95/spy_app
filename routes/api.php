@@ -10,4 +10,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'revokeCurrentToken'])->name('auth.logout');
 
     Route::post('/spies', [SpyController::class, 'store']);
+    Route::get('/get-random-spies', [SpyController::class, 'getRandomSpies']);
 });

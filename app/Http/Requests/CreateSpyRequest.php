@@ -14,7 +14,7 @@ class CreateSpyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; //todo middleware?
+        return true; //handled by sanctum
     }
 
     /**
