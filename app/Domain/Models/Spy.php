@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
-use App\Domain\Events\HasDomainEvents;
 use App\Domain\Events\SpyCreatedEvent;
+use App\Domain\Events\Traits\HasDomainEvents;
 use App\Domain\ValueObjects\Agency;
 use App\Domain\ValueObjects\Date;
 use App\Domain\ValueObjects\Name;
