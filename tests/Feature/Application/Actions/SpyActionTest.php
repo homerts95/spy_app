@@ -51,9 +51,9 @@ class SpyActionTest extends TestCase
     public function test_it_gets_random_spies()
     {
         $this->createTestSpies();
-        $randomSpies = $this->getRandomSpiesAction->execute(3);
+        $randomSpies = $this->getRandomSpiesAction->execute();
 
-        $this->assertCount(3, $randomSpies);
+        $this->assertCount(5, $randomSpies);
         $this->assertContainsOnlyInstancesOf(Spy::class, $randomSpies);
 
     }
