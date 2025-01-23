@@ -23,7 +23,7 @@ readonly class SpyService
         return SpyEloquentModel::fromDomainCreate($spy);
     }
 
-    private function createDomainModel(CreateSpyDTO $dto)
+    private function createDomainModel(CreateSpyDTO $dto): Spy
     {
 
         $name = new Name($dto->firstName, $dto->lastName);
