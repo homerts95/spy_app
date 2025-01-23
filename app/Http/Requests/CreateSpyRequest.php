@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Domain\ValueObjects\Agency;
+use App\Rules\UniqueSpyNameRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
@@ -31,6 +32,7 @@ class CreateSpyRequest extends FormRequest
             'country_of_operation' => ['required', 'string', 'max:255'],
             'date_of_birth' => ['required', 'date', 'before:today'],
             'date_of_death' => ['nullable', 'date', 'after:date_of_birth', 'before:today'],
+            '*' => [new UniqueSpyNameRule()]
         ];
     }
 }
