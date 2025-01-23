@@ -26,7 +26,34 @@ class SpyEloquentModel extends Model
         'date_of_death' => 'datetime'
     ];
 
-    public static function fromDomain(Spy $spy): self
+    public function getName(): Name
+    {
+        return new Name($this->first_name, $this->last_name);
+    }
+
+    public function getAgency(): Agency
+    {
+        return Agency::from($this->agency);
+    }
+
+    public function getCountryOfOperation(): string
+    {
+        return $this->country_of_operation;
+    }
+
+    public function getDateOfBirth(): Date
+    {
+        return new Date($this->date_of_birth->format('Y-m-d'));
+    }
+
+    public function getDateOfDeath(): ?Date
+    {
+        return $this->date_of_death
+            ? new Date($this->date_of_death->format('Y-m-d'))
+            : null;
+    }
+
+    public static function fromDomainCreate(Spy $spy): self
     {
         return static::create([
             'first_name' => $spy->getName()->getFirstName(),
@@ -41,11 +68,11 @@ class SpyEloquentModel extends Model
     public function toDomain(): Spy
     {
         return new Spy(
-            name: new Name($this->first_name, $this->last_name),
-            agency: Agency::from($this->agency),
-            countryOfOperation: $this->country_of_operation,
-            dateOfBirth: new Date($this->date_of_birth->format('Y-m-d')),
-            dateOfDeath: $this->date_of_death ? new Date($this->date_of_death->format('Y-m-d')) : null
+            name: $this->getName(),
+            agency: $this->getAgency(),
+            countryOfOperation: $this->getCountryOfOperation(),
+            dateOfBirth: $this->getDateOfBirth(),
+            dateOfDeath: $this->getDateOfDeath()
         );
     }
 }
