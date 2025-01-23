@@ -4,7 +4,7 @@ namespace Application\Actions;
 
 use App\Application\Actions\CreateSpyAction;
 use App\Application\Actions\GetRandomSpiesAction;
-use App\Application\DTOs\Spy\CreateSpyDTO;
+use App\Application\DTOs\Spy\SpyDTO;
 use App\Domain\Models\Spy;
 use App\Domain\ValueObjects\Agency;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -31,7 +31,7 @@ class SpyActionTest extends TestCase
 
     public function test_it_creates_spy_successfully()
     {
-        $dto = new CreateSpyDTO(
+        $dto = new SpyDTO(
             firstName: 'Annie',
             lastName: 'Hath',
             agency: Agency::MI6->value,
@@ -80,7 +80,7 @@ class SpyActionTest extends TestCase
         ];
 
         foreach ($spies as [$firstName, $lastName, $agency, $country]) {
-            $dto = new CreateSpyDTO(
+            $dto = new SpyDTO(
                 firstName: $firstName,
                 lastName: $lastName,
                 agency: $agency->value,
