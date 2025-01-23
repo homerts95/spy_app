@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Services;
 
-use App\Application\DTOs\Spy\CreateSpyDTO;
-use App\Domain\Models\Spy;
-use App\Domain\ValueObjects\Agency;
-use App\Domain\ValueObjects\Date;
-use App\Domain\ValueObjects\Name;
+use App\Application\Commands\CreateSpyCommand;
+use App\Application\Commands\Handlers\CreateSpyCommandHandler;
 use App\Application\DTOs\Spy\SpyDTO;
-use App\Infrastructure\EloquentModel\SpyEloquentModel;
+use App\Application\DTOs\Spy\SpyResponseDTO;
+use App\Application\Queries\GetRandomSpiesQuery;
+use App\Domain\Models\Spy;
 
 readonly class SpyService
 {
@@ -26,24 +25,16 @@ readonly class SpyService
         return $this->createSpyHandler->handle($command);
     }
 
-        $spy = Spy::create(
-            name: $name,
-            agency: $agency,
-            countryOfOperation: $dto->countryOfOperation,
-            dateOfBirth: $dateOfBirth,
-            dateOfDeath: $dateOfDeath
-        );
-
-        return $spy;
-    }
 
     public function getRandomSpies(int $limit): array
     {
-        return SpyEloquentModel::query()
-            ->inRandomOrder()
-            ->limit($limit)
-            ->get()
-            ->all();
+        $query = new GetRandomSpiesQuery($limit);
+        $spies = $query->execute();
+
+        return array_map(
+            fn ($spy) => SpyResponseDTO::fromDomain($spy),
+            $spies
+        );
     }
 
 }

@@ -73,6 +73,7 @@ class SpyEloquentModel extends Model
     public function toDomain(): Spy
     {
         return new Spy(
+            id: $this->getId(),
             name: $this->getName(),
             agency: $this->getAgency(),
             countryOfOperation: $this->getCountryOfOperation(),
