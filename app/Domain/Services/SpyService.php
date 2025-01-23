@@ -14,23 +14,17 @@ use App\Infrastructure\EloquentModel\SpyEloquentModel;
 
 readonly class SpyService
 {
-    public function __construct()
+    public function __construct(
+        private CreateSpyCommandHandler $createSpyHandler
+    )
     {
     }
 
-    public function createSpy(CreateSpyDTO $dto): SpyEloquentModel
+    public function createSpy(SpyDTO $dto): SpyEloquentModel
     {
-        $spy = $this->createDomainModel($dto);
-        return SpyEloquentModel::fromDomainCreate($spy);
+        $command = new CreateSpyCommand($dto);
+        return $this->createSpyHandler->handle($command);
     }
-
-    private function createDomainModel(CreateSpyDTO $dto): Spy
-    {
-
-        $name = new Name($dto->firstName, $dto->lastName);
-        $agency = Agency::from($dto->agency);
-        $dateOfBirth = new Date($dto->dateOfBirth);
-        $dateOfDeath = $dto->dateOfDeath ? new Date($dto->dateOfDeath) : null;
 
         $spy = Spy::create(
             name: $name,
