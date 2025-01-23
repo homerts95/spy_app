@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application\Actions\CreateSpyAction;
 use App\Application\Actions\GetRandomSpiesAction;
-use App\Application\DTOs\CreateSpyDTO;
+use App\Application\DTOs\Spy\CreateSpyDTO;
 use App\Http\Requests\CreateSpyRequest;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;

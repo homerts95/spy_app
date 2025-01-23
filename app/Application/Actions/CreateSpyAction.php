@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Actions;
 
-use App\Application\DTOs\CreateSpyDTO;
-use App\Domain\Models\Spy;
+use App\Application\DTOs\Spy\CreateSpyDTO;
 use App\Domain\Services\SpyService;
 use App\Infrastructure\EloquentModel\SpyEloquentModel;
 

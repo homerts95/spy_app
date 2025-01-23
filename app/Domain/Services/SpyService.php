@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Services;
 
-use App\Application\DTOs\CreateSpyDTO;
+use App\Application\DTOs\Spy\CreateSpyDTO;
 use App\Domain\Models\Spy;
 use App\Domain\ValueObjects\Agency;
 use App\Domain\ValueObjects\Date;
