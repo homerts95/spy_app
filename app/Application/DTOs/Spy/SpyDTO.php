@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\DTOs\Spy;
 
-readonly class CreateSpyDTO
+readonly class SpyDTO
 {
     public function __construct(
         public string $firstName,

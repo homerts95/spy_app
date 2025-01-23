@@ -4,22 +4,20 @@ declare(strict_types=1);
 
 namespace App\Application\Actions;
 
-use App\Application\DTOs\Spy\CreateSpyDTO;
+use App\Application\DTOs\Spy\SpyDTO;
 use App\Domain\Services\SpyService;
 use App\Infrastructure\EloquentModel\SpyEloquentModel;
 
 readonly class CreateSpyAction
 {
     public function __construct(
-        private readonly SpyService $spyService,
+        private SpyService $spyService,
     )
     {
     }
 
-    public function execute(CreateSpyDTO $dto): SpyEloquentModel
+    public function execute(SpyDTO $dto): SpyEloquentModel
     {
-        $spy = $this->spyService->createSpy($dto);
-
-        return $spy;
+        return $this->spyService->createSpy($dto);
     }
 }

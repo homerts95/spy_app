@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application\Actions\CreateSpyAction;
 use App\Application\Actions\GetRandomSpiesAction;
-use App\Application\DTOs\Spy\CreateSpyDTO;
+use App\Application\DTOs\Spy\SpyDTO;
 use App\Http\Requests\CreateSpyRequest;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +20,7 @@ class SpyController extends Controller
 
     public function store(CreateSpyRequest $request): JsonResponse
     {
-        $dto = CreateSpyDTO::fromRequest($request->validated());
+        $dto = SpyDTO::fromRequest($request->validated());
         $eloquentSpy = $this->createSpyAction->execute($dto);
 
         return response()->json([

@@ -9,6 +9,7 @@ use App\Domain\Models\Spy;
 use App\Domain\ValueObjects\Agency;
 use App\Domain\ValueObjects\Date;
 use App\Domain\ValueObjects\Name;
+use App\Application\DTOs\Spy\SpyDTO;
 use App\Infrastructure\EloquentModel\SpyEloquentModel;
 
 readonly class SpyService
