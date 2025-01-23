@@ -20,6 +20,7 @@ class SpyTest extends TestCase
     private string $countryOfOperation;
     private Date $dateOfBirth;
     private ?Date $dateOfDeath;
+    private $id;
 
     /**
      * @throws Exception
@@ -43,6 +44,7 @@ class SpyTest extends TestCase
             $this->agency,
             $this->countryOfOperation,
             $this->dateOfBirth,
+            $this->id,
             $this->dateOfDeath
         );
 
@@ -104,6 +106,7 @@ class SpyTest extends TestCase
             $this->agency,
             $this->countryOfOperation,
             $this->dateOfBirth,
+            $this->id,
             $deathDate
         );
 

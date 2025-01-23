@@ -5,7 +5,7 @@ namespace Application\Actions;
 use App\Application\Actions\CreateSpyAction;
 use App\Application\Actions\GetRandomSpiesAction;
 use App\Application\DTOs\Spy\SpyDTO;
-use App\Domain\Models\Spy;
+use App\Application\DTOs\Spy\SpyResponseDTO;
 use App\Domain\ValueObjects\Agency;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -54,7 +54,7 @@ class SpyActionTest extends TestCase
         $randomSpies = $this->getRandomSpiesAction->execute();
 
         $this->assertCount(5, $randomSpies);
-        $this->assertContainsOnlyInstancesOf(Spy::class, $randomSpies);
+        $this->assertContainsOnlyInstancesOf(SpyResponseDTO::class, $randomSpies);
 
     }
 
