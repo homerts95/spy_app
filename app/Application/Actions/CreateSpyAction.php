@@ -28,7 +28,7 @@ readonly class CreateSpyAction
             dateOfDeath: $dateOfDeath
         );
 
-        $eloquentModel = SpyEloquentModel::fromDomain($spy);
+        $eloquentModel = SpyEloquentModel::fromDomainCreate($spy);
 
         return $eloquentModel->toDomain();
     }
