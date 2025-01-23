@@ -75,11 +75,11 @@ class SpyTest extends TestCase
     public function should_clear_events_after_pulling(): void
     {
         $spy = Spy::create(
-            $this->name,
-            $this->agency,
-            $this->countryOfOperation,
-            $this->dateOfBirth,
-            $this->dateOfDeath
+            name: $this->name,
+            agency: $this->agency,
+            countryOfOperation: $this->countryOfOperation,
+            dateOfBirth: $this->dateOfBirth,
+            dateOfDeath: $this->dateOfDeath
         );
 
         // first pull get events
