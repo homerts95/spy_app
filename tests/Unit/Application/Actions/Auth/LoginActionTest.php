@@ -6,7 +6,7 @@ namespace Tests\Unit\Application\Actions\Auth;
 
 use App\Application\Actions\Auth\LoginAction;
 use App\Application\DTOs\Auth\LoginRequestDTO;
-use App\Domain\Services\AuthenticationService;
+use App\Domain\Services\Auth\AuthenticationService;
 use App\Domain\ValueObjects\Auth\AuthToken;
 use App\Exceptions\InvalidCredentialsException;
 use PHPUnit\Framework\Attributes\Test;

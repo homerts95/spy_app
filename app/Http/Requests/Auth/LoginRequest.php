@@ -10,7 +10,7 @@ class LoginRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return true; //handled by sanctum
     }
 
     public function rules(): array

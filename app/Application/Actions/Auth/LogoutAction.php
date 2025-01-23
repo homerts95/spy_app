@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Actions\Auth;
 
-use App\Domain\Services\AuthenticationService;
+use App\Domain\Services\Auth\AuthenticationService;
 use App\Exceptions\TokenNotFoundException;
 
 readonly class LogoutAction
