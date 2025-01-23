@@ -6,8 +6,9 @@ namespace App\Domain\Events;
 
 use App\Domain\Models\Spy;
 use DateTimeImmutable;
+use Illuminate\Support\Facades\Event;
 
-class SpyCreatedEvent
+class SpyCreatedEvent extends Event
 {
     public function __construct(
         private readonly Spy $spy
