@@ -22,11 +22,11 @@ class Spy
     private ?Date $dateOfDeath;
 
     public function __construct(
-        ?int $id = null,
         Name   $name,
         Agency $agency,
         string $countryOfOperation,
         Date   $dateOfBirth,
+        ?int $id = null,
         ?Date  $dateOfDeath = null
     )
     {
