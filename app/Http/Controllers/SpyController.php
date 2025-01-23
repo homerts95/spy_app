@@ -21,10 +21,10 @@ class SpyController extends Controller
     public function store(CreateSpyRequest $request): JsonResponse
     {
         $dto = SpyDTO::fromRequest($request->validated());
-        $eloquentSpy = $this->createSpyAction->execute($dto);
+        $spy = $this->createSpyAction->execute($dto);
 
         return response()->json([
-            'data' => $eloquentSpy->toDomain(),
+            'data' => $spy,
             'message' => 'Spy created successfully'
         ], Response::HTTP_CREATED);
     }

@@ -20,7 +20,7 @@ readonly class SpyService
     {
     }
 
-    public function createSpy(SpyDTO $dto): SpyEloquentModel
+    public function createSpy(SpyDTO $dto): Spy
     {
         $command = new CreateSpyCommand($dto);
         return $this->createSpyHandler->handle($command);

@@ -22,6 +22,7 @@ class Spy
     private ?Date $dateOfDeath;
 
     public function __construct(
+        ?int $id = null,
         Name   $name,
         Agency $agency,
         string $countryOfOperation,
@@ -29,6 +30,7 @@ class Spy
         ?Date  $dateOfDeath = null
     )
     {
+        $this->id = $id;
         $this->name = $name;
         $this->agency = $agency;
         $this->countryOfOperation = $countryOfOperation;
@@ -40,19 +42,27 @@ class Spy
         Name   $name,
         Agency $agency,
         string $countryOfOperation,
-        Date   $dateOfBirth,
-        ?Date  $dateOfDeath = null
-    ): self
-    {
-        $spy = new self($name, $agency, $countryOfOperation, $dateOfBirth, $dateOfDeath);
-        $spy->addDomainEvent(new SpyCreatedEvent($spy)); // event is recorded because is not handled here
+        Date $dateOfBirth,
+        ?Date $dateOfDeath = null
+    ): self {
+
+        $spy = new self(
+            id: null,
+            name: $name,
+            agency: $agency,
+            countryOfOperation: $countryOfOperation,
+            dateOfBirth: $dateOfBirth,
+            dateOfDeath: $dateOfDeath
+        );
+
+        $spy->addDomainEvent(new SpyCreatedEvent($spy));
 
         return $spy;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
-        return $this->id ?? null;
+        return $this->id;
     }
 
     public function getName(): Name
@@ -78,5 +88,17 @@ class Spy
     public function getDateOfDeath(): ?Date
     {
         return $this->dateOfDeath;
+    }
+
+    public function withId(int $id): self
+    {
+        return new self(
+            id: $id,
+            name: $this->name,
+            agency: $this->agency,
+            countryOfOperation: $this->countryOfOperation,
+            dateOfBirth: $this->dateOfBirth,
+            dateOfDeath: $this->dateOfDeath
+        );
     }
 }

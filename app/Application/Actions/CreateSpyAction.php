@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Actions;
 
 use App\Application\DTOs\Spy\SpyDTO;
+use App\Domain\Models\Spy;
 use App\Domain\Services\SpyService;
 use App\Infrastructure\EloquentModel\SpyEloquentModel;
 
@@ -16,7 +17,7 @@ readonly class CreateSpyAction
     {
     }
 
-    public function execute(SpyDTO $dto): SpyEloquentModel
+    public function execute(SpyDTO $dto): Spy
     {
         return $this->spyService->createSpy($dto);
     }
