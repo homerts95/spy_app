@@ -4,7 +4,7 @@ namespace Application\Actions;
 
 use App\Application\Actions\CreateSpyAction;
 use App\Application\Actions\GetRandomSpiesAction;
-use App\Application\DTOs\CreateSpyDTO;
+use App\Application\DTOs\Spy\CreateSpyDTO;
 use App\Domain\Models\Spy;
 use App\Domain\ValueObjects\Agency;
 use Illuminate\Contracts\Container\BindingResolutionException;
