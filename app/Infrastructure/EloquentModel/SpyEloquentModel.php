@@ -26,6 +26,11 @@ class SpyEloquentModel extends Model
         'date_of_death' => 'datetime'
     ];
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getName(): Name
     {
         return new Name($this->first_name, $this->last_name);

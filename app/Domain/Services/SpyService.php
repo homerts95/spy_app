@@ -48,7 +48,6 @@ readonly class SpyService
             ->inRandomOrder()
             ->limit($limit)
             ->get()
-            ->map(fn(SpyEloquentModel $model) => $model->toDomain())
             ->all();
     }
 
