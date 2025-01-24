@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Services;
 
 use App\Application\Commands\CreateSpyCommand;
-use App\Application\Commands\Handlers\CreateSpyCommandHandler;
+use App\Application\Commands\Handlers\Spy\CreateSpyCommandHandler;
 use App\Application\DTOs\Spy\SpyDTO;
 use App\Application\DTOs\Spy\SpyResponseDTO;
 use App\Application\Queries\GetRandomSpiesQuery;

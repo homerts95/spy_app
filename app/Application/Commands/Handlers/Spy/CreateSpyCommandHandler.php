@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Commands\Handlers;
+namespace App\Application\Commands\Handlers\Spy;
 
 use App\Application\Commands\CreateSpyCommand;
 use App\Domain\Models\Spy;
