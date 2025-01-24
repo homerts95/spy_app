@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application\Actions\Auth;
 
-use App\Application\Actions\Auth\LoginAction;
+use App\Application\Actions\Auth\GenerateTokenAction;
 use App\Application\DTOs\Auth\LoginRequestDTO;
 use App\Domain\Services\Auth\AuthenticationService;
 use App\Domain\ValueObjects\Auth\AuthToken;
@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 class LoginActionTest extends TestCase
 {
     private AuthenticationService $authService;
-    private LoginAction $loginAction;
+    private GenerateTokenAction $loginAction;
     /**
      * @throws Exception
      */
@@ -24,7 +24,7 @@ class LoginActionTest extends TestCase
     {
         parent::setUp();
         $this->authService = $this->createMock(AuthenticationService::class);
-        $this->loginAction = new LoginAction($this->authService);
+        $this->loginAction = new GenerateTokenAction($this->authService);
     }
 
     /**
