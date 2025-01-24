@@ -32,13 +32,4 @@ class AuthController extends Controller
         }
     }
 
-    /**
-     * @throws TokenNotFoundException
-     */
-    public function revokeCurrentToken(): JsonResponse
-    {
-        $this->logoutAction->execute();
-
-        return response()->json(['message' => 'logout was successfully, token revoked']);
-    }
 }
