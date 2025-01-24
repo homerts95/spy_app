@@ -26,13 +26,12 @@ class CreateSpyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255', new UniqueSpyNameRule()],
+            'last_name' => ['required', 'string', 'max:255', new UniqueSpyNameRule()],
             'agency' => ['required', new Enum(Agency::class)],
             'country_of_operation' => ['required', 'string', 'max:255'],
             'date_of_birth' => ['required', 'date', 'before:today'],
             'date_of_death' => ['nullable', 'date', 'after:date_of_birth', 'before:today'],
-            '*' => [new UniqueSpyNameRule()]
         ];
     }
 }
