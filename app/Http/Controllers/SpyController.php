@@ -24,7 +24,7 @@ class SpyController extends Controller
         $spy = $this->createSpyAction->execute($dto);
 
         return response()->json([
-            'data' => $spy,
+            'data' => $spy->toArray(),
             'message' => 'Spy created successfully'
         ], Response::HTTP_CREATED);
     }
