@@ -2,34 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Application\Actions\Auth\LoginAction;
-use App\Application\Actions\Auth\LogoutAction;
+use App\Application\Actions\Auth\GenerateTokenAction;
 use App\Application\DTOs\Auth\LoginRequestDTO;
 use App\Exceptions\InvalidCredentialsException;
-use App\Exceptions\TokenNotFoundException;
+use App\Exceptions\UserNotFoundException;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
     public function __construct(
-        private readonly LoginAction $loginAction,
-        private readonly LogoutAction $logoutAction,
-    ) {}
+        private readonly GenerateTokenAction $generateTokenAction,
+    )
+    {
+    }
 
     /**
      * Create a new auth token
+     * @throws InvalidCredentialsException|UserNotFoundException
      */
     public function token(LoginRequest $request): JsonResponse
     {
-        try {
-            $dto = LoginRequestDTO::fromRequest($request->validated());
-            $token = $this->loginAction->execute($dto);
+        $dto = LoginRequestDTO::fromRequest($request->validated());
+        $token = $this->generateTokenAction->execute(
+            $dto
+        );
 
-            return response()->json($token->toArray());
-        } catch (InvalidCredentialsException $e) {
-            return response()->json(['message' => $e->getMessage()], $e->getCode());
-        }
+        return response()->json($token->toArray());
     }
 
 }

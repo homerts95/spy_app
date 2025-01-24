@@ -9,15 +9,16 @@ use App\Application\DTOs\Auth\LoginRequestDTO;
 use App\Domain\Services\Auth\AuthenticationService;
 use App\Domain\ValueObjects\Auth\AuthToken;
 use App\Exceptions\InvalidCredentialsException;
+use App\Exceptions\UserNotFoundException;
 
-readonly class LoginAction
+readonly class GenerateTokenAction
 {
     public function __construct(
         private AuthenticationService $authService
     ) {}
 
     /**
-     * @throws InvalidCredentialsException
+     * @throws InvalidCredentialsException|UserNotFoundException
      */
     public function execute(LoginRequestDTO $dto): AuthToken
     {
