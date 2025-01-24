@@ -10,6 +10,7 @@ use App\Application\DTOs\Spy\SpyDTO;
 use App\Application\DTOs\Spy\SpyResponseDTO;
 use App\Application\Queries\GetRandomSpiesQuery;
 use App\Domain\Models\Spy;
+use App\Infrastructure\EloquentModel\SpyEloquentModel;
 
 readonly class SpyService
 {
@@ -19,7 +20,7 @@ readonly class SpyService
     {
     }
 
-    public function createSpy(SpyDTO $dto): Spy
+    public function createSpy(SpyDTO $dto): SpyEloquentModel
     {
         $command = new CreateSpyCommand($dto);
         return $this->createSpyHandler->handle($command);
