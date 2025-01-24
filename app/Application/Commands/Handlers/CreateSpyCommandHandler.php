@@ -29,6 +29,7 @@ readonly class CreateSpyCommandHandler
         $dateOfBirth = new Date($dto->dateOfBirth);
         $dateOfDeath = $dto->dateOfDeath ? new Date($dto->dateOfDeath) : null;
 
+        //event trigger as well
         return Spy::create(
             name: $name,
             agency: $agency,
