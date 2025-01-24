@@ -51,7 +51,10 @@ class AuthenticationService
 
     private function revokeExistingTokens(User $user, string $tokenName): void
     {
-        $user->tokens()->where('name', $tokenName)->delete();
+        $userTokens = $user->tokens()->where('name', $tokenName);
+        if ($userTokens->exists()) {
+            $userTokens->delete();
+        }
     }
 
     private function createNewToken(User $user, string $tokenName): AuthToken
