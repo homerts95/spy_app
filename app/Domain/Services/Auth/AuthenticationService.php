@@ -27,6 +27,9 @@ class AuthenticationService
         return $this->createNewToken($user, $dto->email);
     }
 
+    /**
+     * @throws InvalidCredentialsException
+     */
     private function findUserByEmail(string $email): User
     {
         $user = User::where('email', $email)->first();
