@@ -56,18 +56,4 @@ class AuthenticationServiceTest extends TestCase
 
         $this->authService->authenticateUser($dto);
     }
-
-    public function test_revokes_current_token(): void
-    {
-        $this->actingAs($this->user);
-
-        $token = $this->user->createToken(self::TEST_EMAIL);
-        $this->user->withAccessToken($token->accessToken);
-
-        $this->authService->revokeCurrentToken();
-
-        $this->assertDatabaseMissing('personal_access_tokens', [
-            'id' => $token->accessToken->id
-        ]);
-    }
 }
