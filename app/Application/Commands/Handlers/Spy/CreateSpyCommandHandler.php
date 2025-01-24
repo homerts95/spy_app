@@ -13,12 +13,12 @@ use App\Infrastructure\EloquentModel\SpyEloquentModel;
 
 readonly class CreateSpyCommandHandler
 {
-    public function handle(CreateSpyCommand $command): Spy
+    public function handle(CreateSpyCommand $command): SpyEloquentModel
     {
         $spyDTO = $command->getDTO();
         $spy = $this->getDomainSpyObject($spyDTO);
         $eloquentSpy = SpyEloquentModel::fromDomainCreate($spy);
-        return $spy->withId($eloquentSpy->id);
+        return $eloquentSpy;
     }
 
 

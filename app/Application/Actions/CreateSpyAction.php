@@ -17,7 +17,7 @@ readonly class CreateSpyAction
     {
     }
 
-    public function execute(SpyDTO $dto): Spy
+    public function execute(SpyDTO $dto): SpyEloquentModel
     {
         return $this->spyService->createSpy($dto);
     }

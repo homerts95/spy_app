@@ -8,6 +8,7 @@ use App\Application\DTOs\Spy\SpyDTO;
 
 readonly class CreateSpyCommand
 {
+    //add additional info
     public function __construct(
         private SpyDTO $dto
     ) {}
